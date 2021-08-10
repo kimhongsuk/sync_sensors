@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
 
     n.param<int>("use_3d", use_3d, 0);
     n.param<int>("is_test", is_test, 0);
-    n.param<std::string>("topic_cam", topic_cam, "/image");
+    n.param<std::string>("topic_cam", topic_cam, "/image/image_raw");
     n.param<std::string>("topic_2d", topic_2d, "/laser_scan");
     n.param<std::string>("topic_3d", topic_3d, "/velodyne_points");
 
