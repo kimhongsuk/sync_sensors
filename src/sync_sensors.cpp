@@ -18,7 +18,27 @@ void Sync_Sensors::initialize() {
     ros::Publisher pub_sensors_ = nh_.advertise<sync_sensors::Sensors>("/sensors", 10);
     ros::Publisher pub_laser_ = nh_.advertise<sensor_msgs::LaserScan>("/sync_laser", 1);
     ros::Publisher pub_velo_ = nh_.advertise<sensor_msgs::PointCloud2>("/sync_velodyne", 1);
+}
 
+void Sync_Sensors::callback1(const sensor_msgs::Image::ConstPtr& image, const sensor_msgs::LaserScan::ConstPtr& scan) {
+    sync_sensors::Sensors::Ptr data (new sync_sensors::Sensors);
+
+    data->image = *image;
+    data->scan = *scan;
+
+    sensors_ = *data;
+}
+
+void Sync_Sensors::callback2(const sensor_msgs::Image::ConstPtr& image, const sensor_msgs::PointCloud2::ConstPtr& points) {
+    sync_sensors::Sensors::Ptr data (new sync_sensors::Sensors);
+
+    data->image = *image;
+    data->points = *points;
+
+    sensors_ = *data;
+}
+
+void Sync_Sensors::spin() {
     if (use_3d_ == 0) {
         message_filters::Subscriber<sensor_msgs::Image> image_sub(nh, topic_cam_, 1);
         message_filters::Subscriber<sensor_msgs::LaserScan> scan_sub(nh, topic_2d_, 1);
@@ -46,22 +66,4 @@ void Sync_Sensors::initialize() {
             pub_velo.publish(sensors_.points);
         }
     }
-}
-
-void Sync_Sensors::callback1(const sensor_msgs::Image::ConstPtr& image, const sensor_msgs::LaserScan::ConstPtr& scan) {
-    sync_sensors::Sensors::Ptr data (new sync_sensors::Sensors);
-
-    data->image = *image;
-    data->scan = *scan;
-
-    sensors_ = *data;
-}
-
-void Sync_Sensors::callback2(const sensor_msgs::Image::ConstPtr& image, const sensor_msgs::PointCloud2::ConstPtr& points) {
-    sync_sensors::Sensors::Ptr data (new sync_sensors::Sensors);
-
-    data->image = *image;
-    data->points = *points;
-
-    sensors_ = *data;
 }
