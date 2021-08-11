@@ -5,8 +5,8 @@
     <param name="use_3d"                  value="0"/>
     <param name="is_test"                 value="1"/>
 
-    <param name="topic_cam"               value="/image/image_raw"/>
-    <param name="topic_2d"                value="/laser_scan"/>
+    <param name="topic_cam"               value="/usb_cam/image_raw"/>
+    <param name="topic_2d"                value="/scan"/>
     <param name="topic_3d"                value="/velodyne_points"/>
   </node>
 </launch>

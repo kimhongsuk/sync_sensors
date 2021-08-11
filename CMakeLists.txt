@@ -17,6 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
   std_msgs
   velodyne_pointcloud
+  message_filters
 )
 
 ## System dependencies are found with CMake's conventions
@@ -111,7 +112,7 @@ generate_messages(
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES sync_sensors
-#  CATKIN_DEPENDS eigen_conversions message_generation message_runtime pcl_conversions pcl_ros roscpp sensor_msgs std_msgs velodyne_pointcloud
+  CATKIN_DEPENDS eigen_conversions pcl_conversions pcl_ros roscpp sensor_msgs std_msgs velodyne_pointcloud message_filters
 #  DEPENDS system_lib
 )
 

@@ -9,10 +9,7 @@ int main(int argc, char **argv) {
     ROS_INFO("[Sync Sensors]: Initializing node");
     Sync_Sensors ss(nh, nh_local);
 
-    while (ros::ok()) {
-        ss.spin();
-        ros::spinOnce();
-    }
+    ros::spin();
 
     return 0;
 }
